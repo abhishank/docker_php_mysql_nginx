@@ -1,34 +1,77 @@
-version: '3'
+version: '3.1'
 services: 
     web:
         image: nginx:1.19.10
+        restart: always
         ports:
             - "80:80"
+        networks:
+            - fe_network
         volumes:
             - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
-            - ./app:/app
+            - ./app:/home/projects/
+            
     php:
         build:
             context: ./build
             dockerfile: PHP.Dockerfile
+        networks:
+            - fe_network
+            - database
         volumes:
-            - ./app:/app
+            - ./app:/home/projects/
+        depends_on:
+            - mysql
+        #user: "$UID"
+
     mysql:
         image: mysql:5.7
+        command: --default-authentication-plugin=mysql_native_password
+        hostname: mysql
+        restart: always
         environment:
             MYSQL_ROOT_PASSWORD: 'root'
             MYSQL_USER: 'fe_db'
             MYSQL_PASSWORD: 'root'
             MYSQL_DATAbASE: 'fe_db'
+        networks:
+            - database
         volumes:
             - mysqldata:/var/lib/mysql
-        ports:
-            - 3306:3306
-            #Host->mysql; root_user->root; pass->root
+        # ports:
+        #     - 3306:3306
+    #Host->mysql; root_user->root; pass->root <- use these creds
+
     adminer:
         image: adminer
         restart: always
         ports:
             - 8080:8080
+        networks:
+            - database
+        depends_on:
+            - mysql
+    
+    elasticsearch:
+        build: 
+            context: ./build
+            dockerfile: ELASTIC.Dockerfile
+        environment:
+            - "discovery.type=single-node"
+            - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        depends_on: 
+            - php
+        networks:
+            - fe_network
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        volumes:
+            - "/home/docker/data/magento2/data:/home/data"
+
 volumes:
     mysqldata: {}
+
+networks:
+    fe_network:
+    database:
