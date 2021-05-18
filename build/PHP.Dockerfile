@@ -7,7 +7,7 @@ FROM php:7.4-fpm
 COPY --from=composer:1.10.22 /usr/bin/composer /usr/local/bin/composer
 
 RUN apt-get update \
-    && apt-get install -y git zip unzip zlib1g-dev libzip-dev libicu-dev libxml2-dev libpng-dev g++ libxslt-dev libfreetype6-dev libjpeg62-turbo-dev     \
+    && apt-get install -y git zip unzip zlib1g-dev libzip-dev libicu-dev libxml2-dev libpng-dev g++ libxslt-dev libfreetype6-dev libjpeg62-turbo-dev \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -27,11 +27,11 @@ RUN usermod -u 1000 www-data
 
 RUN mkdir -p /home/www-data/.ssh/
 COPY keys/config /home/www-data/.ssh/config
-COPY keys/code_commit_rsa /home/www-data/.ssh/code_commit_rsa
+COPY keys/aws-code-commit-ssh.pub /home/www-data/.ssh/aws-code-commit-ssh.pub
 RUN chmod -R 0600 /home/www-data/.ssh/*
 RUN chown -R www-data:www-data /home/www-data/.ssh/*
 
-WORKDIR /home/projects/public
+WORKDIR /home/projects
 
 
 # COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh

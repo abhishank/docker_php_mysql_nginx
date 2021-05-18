@@ -1,3 +1,6 @@
 app/public/
+!app/public/nginx.conf.sample
+app/public_erp/
+!app/public_erp/nginx.conf.sample
 build/keys/
 .vscode/

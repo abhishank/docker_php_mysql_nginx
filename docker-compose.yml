@@ -3,12 +3,13 @@ version: '3.1'
 services: 
     web:
         image: nginx:1.19.10
-        ports:
-            - "80:80"
         depends_on: 
             - php
         networks:
             - fe_network
+        ports:
+            - "80:80"
+            - "81:81"
         volumes:
             - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
             - ./app:/home/projects/
