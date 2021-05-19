@@ -25,13 +25,21 @@ RUN chmod -R 777 /var/www/
 
 RUN usermod -u 1000 www-data
 
-RUN mkdir -p /home/www-data/.ssh/
-COPY keys/config /home/www-data/.ssh/config
-COPY keys/aws-code-commit-ssh.pub /home/www-data/.ssh/aws-code-commit-ssh.pub
-RUN chmod -R 0600 /home/www-data/.ssh/*
-RUN chown -R www-data:www-data /home/www-data/.ssh/*
+# RUN mkdir -p /home/www-data/.ssh/
+# COPY keys/config /home/www-data/.ssh/config
+# COPY keys/aws-code-commit-ssh.pub /home/www-data/.ssh/aws-code-commit-ssh.pub
+# RUN chmod -R 0600 /home/www-data/.ssh/*
+# RUN chown -R www-data:www-data /home/www-data/.ssh/*
 
-WORKDIR /home/projects
+RUN mkdir -p /var/www/.ssh/
+COPY keys/config /var/www/.ssh/config
+COPY keys/aws-code-commit-ssh /var/www/.ssh/aws-code-commit-ssh
+RUN chmod -R 0700 /var/www/.ssh
+RUN chmod 600 /var/www/.ssh/aws-code-commit-ssh
+RUN chown -R www-data:www-data /var/www/
+
+
+WORKDIR /home/projects/public_erp
 
 
 # COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
