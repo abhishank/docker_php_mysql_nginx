@@ -1,2 +1,0 @@
-file for creating folder staructure.
-application goes here
