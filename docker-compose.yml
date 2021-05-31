@@ -42,8 +42,8 @@ services:
             - database
         volumes:
             - mysqldata:/var/lib/mysql
-        # ports:
-        #     - 3306:3306
+        ports:
+            - 3306:3306
     #Host->mysql; root_user->root; pass->root <- use these creds
 
     adminer:
@@ -71,7 +71,7 @@ services:
             - "9200:9200"
             - "9300:9300"
         volumes:
-            - "/home/docker/data/magento2/data:/home/data"
+            - "./data:/home/data"
 
 volumes:
     mysqldata: {}
