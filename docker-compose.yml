@@ -71,7 +71,20 @@ services:
             - "9200:9200"
             - "9300:9300"
         volumes:
-            - "./data:/home/data"
+            - "./data/elasticsearch/data:/home/data"
+    
+    rabbitmq:
+        image: rabbitmq:3-management
+        container_name: 'rabbitmq'
+        networks:
+            - fe_network
+        ports: 
+            - "5672:5672"
+            - "15672:15672"
+        volumes:
+            - ./data/rabbitmq/data/:/var/lib/rabbitmq/
+            - ./data/rabbitmq/log/:/var/log/rabbitmq
+    # rabbitmq amnagement host: http://localhost:15672  user:guest  pass:guest
 
 volumes:
     mysqldata: {}

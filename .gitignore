@@ -4,3 +4,4 @@ app/public_erp/
 !app/public_erp/nginx.conf.sample
 build/keys/
 .vscode/
+data
