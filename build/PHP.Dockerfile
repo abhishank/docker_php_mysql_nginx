@@ -7,7 +7,10 @@ FROM php:7.4-fpm
 COPY --from=composer:1.10.22 /usr/bin/composer /usr/local/bin/composer
 
 RUN apt-get update \
-    && apt-get install -y git zip unzip zlib1g-dev libzip-dev libicu-dev libxml2-dev libpng-dev g++ libxslt-dev libfreetype6-dev libjpeg62-turbo-dev \
+    && apt-get install -y \
+        git zip unzip zlib1g-dev libzip-dev libicu-dev libxml2-dev \
+        libpng-dev g++ libxslt-dev libfreetype6-dev libjpeg62-turbo-dev \
+        cron \
     && apt-get -y autoremove \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -37,6 +40,15 @@ COPY keys/aws-code-commit-ssh /var/www/.ssh/aws-code-commit-ssh
 RUN chmod -R 0700 /var/www/.ssh
 RUN chmod 600 /var/www/.ssh/aws-code-commit-ssh
 RUN chown -R www-data:www-data /var/www/
+
+
+RUN mkdir /var/log/cron
+RUN touch /var/log/cron/cron.log
+RUN chown -R www-data:www-data /var/log/cron
+COPY cronSchedule /cronSchedule
+RUN /usr/bin/crontab -u www-data /cronSchedule
+# CMD ["cron", "-f"]
+CMD cron && docker-php-entrypoint php-fpm
 
 
 WORKDIR /home/projects/public_erp
