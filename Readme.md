@@ -90,7 +90,7 @@
 
 6. Magento2.4 onwards GUI install is not supported. So we nee to install via CLI. This is a sample setup command. Modify according to your setup:- 
 <pre>
-php -dmemory_limit=2G bin/magento setup:install --base-url=http://fe.brandalley.local/ --db-host=brandalleyfe_mysql_1 --db-name=fe_db --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=adminaa@admin.com --admin-user=adminaa --admin-password=admin123 --language=en_GB --currency=GBP --timezone=Europe/London --use-rewrites=1 --backend-frontname="admin" --session-save="db" --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch --elasticsearch-index-prefix=magento2 --es-hosts="elasticsearch:9200"
+php -dmemory_limit=2G bin/magento setup:install --base-url=http://fe.brandalley.local/ --db-host=mysql --db-name=fe_db --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=adminaa@admin.com --admin-user=adminaa --admin-password=admin123 --language=en_GB --currency=GBP --timezone=Europe/London --use-rewrites=1 --backend-frontname="admin" --session-save="db" --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch --elasticsearch-index-prefix=magento2 --es-hosts="elasticsearch:9200"
 </pre>
 
 ---
@@ -123,5 +123,5 @@ php -dmemory_limit=2G bin/magento setup:install --base-url=http://fe.brandalley.
 
 6. Magento2.4 onwards GUI install is not supported. So we nee to install via CLI. This is a sample setup command. Modify according to your setup:- 
 <pre>
-php -dmemory_limit=2G bin/magento setup:install --base-url=http://erp.brandalley.local:81/ --db-host=barndalleyfe_mysql_1 --db-name=erp_db --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=adminaa@admin.com --admin-user=adminaa --admin-password=admin123 --language=en_GB --currency=GBP --timezone=Europe/London --use-rewrites=1 --backend-frontname="admin" --session-save="db" --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch --elasticsearch-index-prefix=magento_erp
+php -dmemory_limit=2G bin/magento setup:install --base-url=http://erp.brandalley.local:81/ --db-host=mysql --db-name=erp_db --db-user=root --db-password=root --admin-firstname=admin --admin-lastname=admin --admin-email=adminaa@admin.com --admin-user=adminaa --admin-password=admin123 --language=en_GB --currency=GBP --timezone=Europe/London --use-rewrites=1 --backend-frontname="admin" --session-save="db" --search-engine=elasticsearch7 --elasticsearch-host=elasticsearch --elasticsearch-index-prefix=magento_erp
 </pre>

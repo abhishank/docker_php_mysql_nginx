@@ -1,7 +1,7 @@
 #~ Test cron
 * * * * * date && echo  "Test cron to check status of cron service" >> /var/log/cron/cron.log 2>&1
 #~ Magento FE cron
-* * * * * /usr/local/bin/php -dmemory_limit=2G /home/projects/public/bin/magento cron:run 2>&1 | grep -v \"Ran jobs by schedule\" >> /home/projects/public/var/log/magento.cron.log
+#* * * * * /usr/local/bin/php -dmemory_limit=2G /home/projects/public/bin/magento cron:run 2>&1 | grep -v \"Ran jobs by schedule\" >> /home/projects/public/var/log/magento.cron.log
 #~ Magento ERP cron
 #* * * * * /usr/local/bin/php -dmemory_limit=2G /home/projects/public_erp/bin/magento cron:run 2>&1 | grep -v \"Ran jobs by schedule\" >> /home/projects/public_erp/var/log/magento.cron.log
 

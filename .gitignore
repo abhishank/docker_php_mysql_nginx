@@ -5,3 +5,5 @@ app/public_erp/
 build/keys/
 .vscode/
 data
+app/magento_local/
+!app/magento_local/nginx.conf.sample
