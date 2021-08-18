@@ -10,6 +10,7 @@ services:
         ports:
             - "80:80"
             - "81:81"
+            - "82:82"
         volumes:
             - ./nginx.conf:/etc/nginx/conf.d/nginx.conf
             - ./app:/home/projects/
